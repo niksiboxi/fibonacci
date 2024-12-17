@@ -2,18 +2,19 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-uint8_t fibonacci_array[10];
-
 int main(void) {
-    fibonacci_array[0] = 0;
-    fibonacci_array[1] = 1;
+    uint8_t x = 0x00;
+    uint8_t y = 0x01;
+    uint8_t i = 0;
 
-    for (int i = 2; i < 10; i++) {
-        fibonacci_array[i] = fibonacci_array[i - 1] + fibonacci_array[i - 2];
-    }
+    while (i < 10)
+    {
+        printf("%d\n", x);
 
-    for (int i = 0; i < 10; i++) {
-        printf("%d\n", fibonacci_array[i]);
+        uint8_t temp = x + y;
+        x = y;
+        y = temp;
+        i++;
     }
 
     return 0;
