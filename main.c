@@ -2,20 +2,24 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-int main(void) {
-    uint8_t x = 0x00;
-    uint8_t y = 0x01;
-    uint8_t i = 0;
 
-    while (i < 10)
-    {
-        printf("%d\n", x);
-
-        uint8_t temp = x + y;
-        x = y;
-        y = temp;
-        i++;
+size_t fibonacci(uint8_t index) {
+    if (index < 2) {
+        return index;
     }
+
+    return fibonacci(index - 1) + fibonacci(index - 2);
+}
+
+
+
+int main(void) {
+    uint8_t index;
+    
+    printf("Select the index of the Fibonacci sequence: ");
+    scanf("%hhd", &index);
+
+    printf("Fibonacci(%u) = %zu\n", index, fibonacci(index));
 
     return 0;
 }
