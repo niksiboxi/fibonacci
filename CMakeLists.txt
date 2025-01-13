@@ -2,14 +2,24 @@ cmake_minimum_required(VERSION 3.12)
 
 project(fibonacci)
 
+include(FetchContent)
+
+find_package(GTest REQUIRED)
+
 add_executable(MyExecutable main.c)
+
+file(GLOB_RECURSE SRC_FILES src/*.c src/*.cpp)
+target_sources(MyExecutable PRIVATE ${SRC_FILES})
+target_include_directories(MyExecutable PRIVATE src)
 
 target_compile_options(MyExecutable PRIVATE -g -fstack-usage)
 
-# Custom target to print stack usage
-add_custom_target(print_stack_usage ALL
-    COMMAND ${CMAKE_COMMAND} -E echo "Stack usage for each function:"
-    COMMAND ${CMAKE_COMMAND} -E cat ${CMAKE_BINARY_DIR}/CMakeFiles/MyExecutable.dir/*.su
-    DEPENDS MyExecutable
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-)
+# Enable Google testing
+enable_testing()
+
+add_executable(fibonacci_test fibonacci_test.cc)
+target_sources(fibonacci_test PRIVATE ${SRC_FILES})
+target_link_libraries(fibonacci_test GTest::gtest_main)
+
+include(GoogleTest)
+gtest_discover_tests(fibonacci_test)
