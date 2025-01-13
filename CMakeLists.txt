@@ -6,13 +6,13 @@ include(FetchContent)
 
 find_package(GTest REQUIRED)
 
-add_executable(MyExecutable main.c)
+add_executable(Fibonacci main.c)
 
 file(GLOB_RECURSE SRC_FILES src/*.c src/*.cpp)
-target_sources(MyExecutable PRIVATE ${SRC_FILES})
-target_include_directories(MyExecutable PRIVATE src)
+target_sources(Fibonacci PRIVATE ${SRC_FILES})
+target_include_directories(Fibonacci PRIVATE src)
 
-target_compile_options(MyExecutable PRIVATE -g -fstack-usage)
+target_compile_options(Fibonacci PRIVATE -g -fstack-usage)
 
 # Enable Google testing
 enable_testing()
